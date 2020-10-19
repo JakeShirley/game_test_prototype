@@ -1,14 +1,12 @@
 #include "GameTestBatch.h"
 
-namespace gametest
-{
+namespace gametest {
 	const std::string GameTestBatch::sDefaultBatchName = "defaultBatch";
-	
-	GameTestBatch::GameTestBatch(std::string name, std::vector<std::shared_ptr<BaseGameTestFunction>> testFunctions, BeforeBatchFunction beforeBatchFunction /*= nullptr*/) 
+
+	GameTestBatch::GameTestBatch(std::string name, std::vector<std::shared_ptr<BaseGameTestFunction>> testFunctions, BeforeBatchFunction beforeBatchFunction /*= nullptr*/)
 		: mName(std::move(name))
 		, mTestFunctions(std::move(testFunctions))
-		, mBeforeBatchFunction(std::move(beforeBatchFunction)) 
-	{
+		, mBeforeBatchFunction(std::move(beforeBatchFunction)) {
 		if (mTestFunctions.empty()) {
 			// TODO: Error "A GameTestBatch must include at least one TestFunction!"
 		}

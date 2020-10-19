@@ -7,65 +7,63 @@
 #include <string>
 #include <vector>
 
-namespace gametest
-{
-    class BaseGameTestFunction;
+namespace gametest {
+	class BaseGameTestFunction;
 	class BaseGameTestHelper;
 	class GameTestSequence;
 	class IGameTestHelperProvider;
-    class IGameTestListener;
+	class IGameTestListener;
 
-    class GameTestInstance
-    {
-    public:
+	class GameTestInstance {
+	public:
 		// DEBUG HACK
 		static int sLevelTick;
 
-        GameTestInstance(BaseGameTestFunction &testFunction, IGameTestHelperProvider &helper);
+		GameTestInstance(BaseGameTestFunction& testFunction, IGameTestHelperProvider& helper);
 		~GameTestInstance();
 
-        void addListener(std::shared_ptr<IGameTestListener> listener);
+		void addListener(std::shared_ptr<IGameTestListener> listener);
 
-        const std::string &getTestName() const;
+		const std::string& getTestName() const;
 		int getTick() const;
 
 		void spawnStructure();
 
-        GameTestSequence& createSequence();
+		GameTestSequence& createSequence();
 
-        /**
+		/**
 		 * Ends the test on timeout, or if succeedWhenThisAssertPasses passes.
 		 */
-        void tick();
+		void tick();
 
-        void startExecution();
-        void startTest();
+		void startExecution();
+		void startTest();
 
 		bool hasSucceeded() const;
 		bool hasFailed() const;
 		bool hasStarted() const;
-        bool isDone() const;
+		bool isDone() const;
 		bool isRequired() const;
 
-        void succeed();
-        void fail(GameTestError error);
-        void finish();
+		void succeed();
+		void fail(GameTestError error);
+		void finish();
 
-		const  std::optional<GameTestError>& getError() const;
+		const std::optional<GameTestError>& getError() const;
 
-    private:
-        std::unique_ptr<BaseGameTestHelper> mTestHelper;
-        std::vector<std::shared_ptr<IGameTestListener>> mListeners;
-        std::vector<std::unique_ptr<GameTestSequence>> mSequences;
+	private:
+		std::unique_ptr<BaseGameTestHelper> mTestHelper;
+		std::vector<std::shared_ptr<IGameTestListener>> mListeners;
+		std::vector<std::unique_ptr<GameTestSequence>> mSequences;
 
-        std::optional<GameTestError> mError;
+		std::optional<GameTestError> mError;
 
-        BaseGameTestFunction &mTestFunction;
-        int mTickCount = 0;
-        int mStartTick = 0;
-        const int mTimeoutTicks = 0;
-        const int mSetupTicks = 0;
-        bool mIsDone = false;
-        bool mIsStarted = false;
+		BaseGameTestFunction& mTestFunction;
+		int mTickCount = 0;
+		int mStartTick = 0;
+		const int mTimeoutTicks = 0;
+		const int mSetupTicks = 0;
+		bool mIsDone = false;
+		bool mIsStarted = false;
 	};
 } // namespace gametest

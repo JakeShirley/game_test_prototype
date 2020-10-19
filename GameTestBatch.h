@@ -3,8 +3,7 @@
 #include <functional>
 #include <string>
 
-namespace gametest
-{
+namespace gametest {
 	class BaseGameTestFunction;
 
 	class GameTestBatch {

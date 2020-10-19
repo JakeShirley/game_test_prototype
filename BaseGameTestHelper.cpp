@@ -3,10 +3,9 @@
 #include "GameTestInstance.h"
 #include "GameTestSequence.h"
 
-namespace gametest
-{
-    
-	BaseGameTestHelper::BaseGameTestHelper(GameTestInstance &testInstance) 
+namespace gametest {
+
+	BaseGameTestHelper::BaseGameTestHelper(GameTestInstance& testInstance)
 		: mTestInstance(testInstance) {
 	}
 

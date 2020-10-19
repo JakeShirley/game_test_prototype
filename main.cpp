@@ -1,18 +1,18 @@
 
-#include <memory>
-
-#include "GameTestInstance.h"
-#include "NativeGameTestFunction.h"
 #include "BaseGameTestHelper.h"
 #include "ConsoleGameTestListener.h"
 #include "GameTestBatchRunner.h"
+#include "GameTestInstance.h"
 #include "GameTestRunner.h"
 #include "GameTestTicker.h"
 #include "IGameTestHelperProvider.h"
+#include "NativeGameTestFunction.h"
+
+#include <memory>
 
 class DebugGameTestHelperProvider : public gametest::IGameTestHelperProvider {
 public:
-	virtual std::unique_ptr<gametest::BaseGameTestHelper> createGameTestHelper(gametest::GameTestInstance &testInstance) {
+	virtual std::unique_ptr<gametest::BaseGameTestHelper> createGameTestHelper(gametest::GameTestInstance& testInstance) {
 		return std::make_unique<gametest::BaseGameTestHelper>(testInstance);
 	}
 };

@@ -2,13 +2,12 @@
 
 #include "BaseGameTestFunction.h"
 #include "ConsoleGameTestListener.h"
+#include "GameTestBatchRunner.h"
 #include "GameTestInstance.h"
 #include "GameTestTicker.h"
-#include "GameTestBatchRunner.h"
 
-namespace gametest
-{
-    
+namespace gametest {
+
 	void GameTestRunner::runTest(std::shared_ptr<GameTestInstance> test, GameTestTicker& ticker) {
 		test->startExecution();
 		ticker.add(test);
@@ -34,11 +33,10 @@ namespace gametest
 		return result;
 	}
 
-	std::unique_ptr<GameTestBatchRunner> GameTestRunner::runTestBatches(IGameTestHelperProvider &helperProvider, const std::vector<GameTestBatch>& batches, GameTestTicker& testTicker, int testsPerRow) {
+	std::unique_ptr<GameTestBatchRunner> GameTestRunner::runTestBatches(IGameTestHelperProvider& helperProvider, const std::vector<GameTestBatch>& batches, GameTestTicker& testTicker, int testsPerRow) {
 		auto runner = std::make_unique<GameTestBatchRunner>(helperProvider, batches, testTicker, testsPerRow);
 		runner->start();
 		return runner;
 	}
 
 } // namespace gametest
-

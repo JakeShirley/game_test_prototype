@@ -1,6 +1,7 @@
 #include "MultipleTestTracker.h"
 
 #include "GameTestInstance.h"
+
 #include <sstream>
 
 namespace gametest {
@@ -10,10 +11,10 @@ namespace gametest {
 	const std::string MultipleTestTracker::SUCCESSFUL_TEST_CHAR = "+";
 	const std::string MultipleTestTracker::FAILED_OPTIONAL_TEST_CHAR = "x";
 	const std::string MultipleTestTracker::FAILED_REQUIRED_TEST_CHAR = "X";
-	
+
 	MultipleTestTracker::MultipleTestTracker() = default;
 
-	MultipleTestTracker::MultipleTestTracker(const std::vector<std::shared_ptr<GameTestInstance>>& tests) 
+	MultipleTestTracker::MultipleTestTracker(const std::vector<std::shared_ptr<GameTestInstance>>& tests)
 		: mTests(tests) {
 	}
 

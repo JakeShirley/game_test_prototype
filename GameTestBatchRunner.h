@@ -6,8 +6,7 @@
 #include <utility>
 #include <vector>
 
-namespace gametest
-{
+namespace gametest {
 	class GameTestTicker;
 	class GameTestInstance;
 	class IGameTestHelperProvider;
@@ -15,7 +14,7 @@ namespace gametest
 
 	class GameTestBatchRunner {
 	public:
-		GameTestBatchRunner(IGameTestHelperProvider &helperProvider, std::vector<GameTestBatch> batches, GameTestTicker& testTicker, int testsPerRow);
+		GameTestBatchRunner(IGameTestHelperProvider& helperProvider, std::vector<GameTestBatch> batches, GameTestTicker& testTicker, int testsPerRow);
 		~GameTestBatchRunner();
 
 		/**
@@ -32,7 +31,6 @@ namespace gametest
 		void createStructuresForBatch(std::vector<std::shared_ptr<GameTestInstance>>& batch);
 
 	private:
-
 		// TODO
 		//private static final Logger LOGGER = LogManager.getLogger();
 		//private final BlockPos firstTestNorthWestCorner;
@@ -49,4 +47,4 @@ namespace gametest
 		std::unique_ptr<MultipleTestTracker> mCurrentBatchTracker;
 		int mCurrentBatchIndex = 0;
 	};
-}// gametest
+} // gametest

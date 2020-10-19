@@ -6,22 +6,21 @@
 
 #include <sstream>
 
-namespace gametest
-{
-  
-	GameTestSequence::GameTestSequence(GameTestInstance &testInstance) 
+namespace gametest {
+
+	GameTestSequence::GameTestSequence(GameTestInstance& testInstance)
 		: mTestInstance(testInstance)
 		, mLastTick(testInstance.getTick()) {
 	}
 
 	GameTestSequence::~GameTestSequence() = default;
 
-	GameTestSequence & GameTestSequence::thenWait(int expectedDelay, GameTestActionCallback action) {
+	GameTestSequence& GameTestSequence::thenWait(int expectedDelay, GameTestActionCallback action) {
 		mActions.emplace_back(std::make_unique<NativeFunctionGameTestAction>(expectedDelay, std::move(action)));
 		return *this;
 	}
 
-	GameTestSequence & GameTestSequence::thenWait(GameTestActionCallback action) {
+	GameTestSequence& GameTestSequence::thenWait(GameTestActionCallback action) {
 		mActions.emplace_back(std::make_unique<NativeFunctionGameTestAction>(std::move(action)));
 		return *this;
 	}
@@ -45,14 +44,12 @@ namespace gametest
 	}
 
 	std::optional<gametest::GameTestError> GameTestSequence::tick(int currentTick) {
-		for (auto actionItr = mActions.begin(); actionItr != mActions.end();)
-		{
-			BaseGameTestAction &action = *actionItr->get();
+		for (auto actionItr = mActions.begin(); actionItr != mActions.end();) {
+			BaseGameTestAction& action = *actionItr->get();
 			auto actionResult = action.run();
 
 			// Return now if our action error'd
-			if (actionResult)
-			{
+			if (actionResult) {
 				return actionResult;
 			}
 
@@ -60,8 +57,7 @@ namespace gametest
 			const int previousTick = mLastTick;
 			mLastTick = currentTick;
 
-			if (action.getExpectedDelay() && action.getExpectedDelay() != delay)
-			{
+			if (action.getExpectedDelay() && action.getExpectedDelay() != delay) {
 				std::stringstream ss;
 				ss << "Succeeded in invalid tick: expected " << (previousTick + action.getExpectedDelay().value()) << ", but current tick is " << currentTick;
 				mTestInstance.fail({ GameTestErrorType::Unknown, ss.str() });

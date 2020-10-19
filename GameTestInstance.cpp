@@ -6,11 +6,10 @@
 #include "IGameTestHelperProvider.h"
 #include "IGameTestListener.h"
 
-namespace gametest
-{
+namespace gametest {
 	int GameTestInstance::sLevelTick = 0;
 
-	GameTestInstance::GameTestInstance(BaseGameTestFunction &testFunction, IGameTestHelperProvider &helper)
+	GameTestInstance::GameTestInstance(BaseGameTestFunction& testFunction, IGameTestHelperProvider& helper)
 		: mTestFunction(testFunction)
 		, mTestHelper(helper.createGameTestHelper(*this)) // NOTE: This might need to move to startExecution so our instance is fully created
 		, mTimeoutTicks(testFunction.getMaxTicks()) {
@@ -23,7 +22,7 @@ namespace gametest
 		mListeners.emplace_back(std::move(listener));
 	}
 
-	const std::string & GameTestInstance::getTestName() const {
+	const std::string& GameTestInstance::getTestName() const {
 		return mTestFunction.getTestName();
 	}
 
@@ -33,8 +32,7 @@ namespace gametest
 
 	void GameTestInstance::spawnStructure() {
 		// TODO: Implement this
-		for (auto &&listener : mListeners)
-		{
+		for (auto&& listener : mListeners) {
 			listener->onTestStructureLoaded(*this);
 		}
 	}
@@ -52,44 +50,36 @@ namespace gametest
 	}
 
 	void GameTestInstance::tick() {
-		if (isDone())
-		{
+		if (isDone()) {
 			return;
 		}
 		mTickCount = sLevelTick - mStartTick;
 
 		// If we're still setting up
-		if (mTickCount < 0)
-		{
+		if (mTickCount < 0) {
 			return;
 		}
 		// If we just started
-		else if (mTickCount == 0)
-		{
+		else if (mTickCount == 0) {
 			startTest();
 		}
 
-		if (mTickCount > mTimeoutTicks)
-		{
+		if (mTickCount > mTimeoutTicks) {
 			// Timed out! Time to end the test.
-			if (mSequences.empty())
-			{
+			if (mSequences.empty()) {
 				fail({ GameTestErrorType::Unknown, "Didn't succeed or fail within " + std::to_string(mTestFunction.getMaxTicks()) + " ticks" });
 			}
-			else
-			{
+			else {
 				for (auto&& sequencePtr : mSequences) {
 					sequencePtr->tickAndFailIfNotComplete(mTickCount);
 				}
-				
-				if (!mError)
-				{
+
+				if (!mError) {
 					fail({ GameTestErrorType::Unknown, "No sequences finished" });
 				}
 			}
 		}
-		else
-		{
+		else {
 			// Not timed out. We'll end the test only if we have a currentAssert and it is successful
 			//sequences.forEach(ticker->ticker.tickAndContinue(tickCount));
 			for (auto&& sequencePtr : mSequences) {
@@ -99,8 +89,7 @@ namespace gametest
 	}
 
 	void GameTestInstance::startTest() {
-		if (mIsStarted)
-		{
+		if (mIsStarted) {
 			// TODO: Error: Test already started
 		}
 		mIsStarted = true;
@@ -128,12 +117,10 @@ namespace gametest
 	}
 
 	void GameTestInstance::succeed() {
-		if (!mError)
-		{
+		if (!mError) {
 			finish();
 
-			for (auto &&listener : mListeners)
-			{
+			for (auto&& listener : mListeners) {
 				listener->onTestPassed(*this);
 			}
 		}
@@ -143,15 +130,13 @@ namespace gametest
 		finish();
 		mError = std::move(error);
 
-		for (auto &&listener : mListeners)
-		{
+		for (auto&& listener : mListeners) {
 			listener->onTestFailed(*this);
 		}
 	}
 
 	void GameTestInstance::finish() {
-		if (!mIsDone)
-		{
+		if (!mIsDone) {
 			mIsDone = true;
 		}
 	}

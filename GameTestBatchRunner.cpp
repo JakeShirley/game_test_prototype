@@ -5,24 +5,20 @@
 #include "IGameTestListener.h"
 #include "MultipleTestTracker.h"
 
-namespace gametest
-{
+namespace gametest {
 	class GameTestBatchRunnerGameTestListener : public IGameTestListener {
 	public:
-		GameTestBatchRunnerGameTestListener(GameTestBatchRunner& batchRunner) 
-			: mBatchRunner(batchRunner) 
-		{}
+		GameTestBatchRunnerGameTestListener(GameTestBatchRunner& batchRunner)
+			: mBatchRunner(batchRunner) {}
 
-		void onTestStructureLoaded(GameTestInstance &/*test*/) override {
+		void onTestStructureLoaded(GameTestInstance& /*test*/) override {
 		}
 
-		void onTestPassed(GameTestInstance &testInstance) override
-		{
+		void onTestPassed(GameTestInstance& testInstance) override {
 			mBatchRunner.testCompleted(testInstance);
 		}
 
-		void onTestFailed(GameTestInstance &testInstance) override
-		{
+		void onTestFailed(GameTestInstance& testInstance) override {
 			mBatchRunner.testCompleted(testInstance);
 		}
 
@@ -30,10 +26,9 @@ namespace gametest
 		GameTestBatchRunner& mBatchRunner;
 	};
 
-	GameTestBatchRunner::GameTestBatchRunner(IGameTestHelperProvider &helperProvider, std::vector<GameTestBatch> batches, GameTestTicker& testTicker, int testsPerRow)
+	GameTestBatchRunner::GameTestBatchRunner(IGameTestHelperProvider& helperProvider, std::vector<GameTestBatch> batches, GameTestTicker& testTicker, int testsPerRow)
 		: mTestTicker(testTicker)
 		, mTestsPerRow(testsPerRow) {
-
 		for (auto&& batch : batches) {
 			std::vector<std::shared_ptr<GameTestInstance>> instances;
 			for (auto&& testFunction : batch.getTestFunctions()) {
@@ -103,7 +98,7 @@ namespace gametest
 		for (auto&& testInstance : testInfosForThisBatch) {
 			mCurrentBatchTracker->addTestToTrack(testInstance);
 			mCurrentBatchTracker->addListener(std::make_shared<GameTestBatchRunnerGameTestListener>(*this));
-		
+
 			//final BlockPos northWestCorner = northWestCorners.get(testInfo);
 			GameTestRunner::runTest(testInstance, mTestTicker);
 		}
@@ -115,4 +110,4 @@ namespace gametest
 		}
 	}
 
-}// gametest
+} // gametest
