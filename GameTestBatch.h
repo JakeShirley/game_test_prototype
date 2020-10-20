@@ -6,6 +6,9 @@
 namespace gametest {
 	class BaseGameTestFunction;
 
+	///
+	// A batch of BaseGameTestFunctions (not instances)
+	///
 	class GameTestBatch {
 	public:
 		static const std::string sDefaultBatchName;

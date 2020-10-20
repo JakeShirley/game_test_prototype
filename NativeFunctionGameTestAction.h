@@ -6,6 +6,10 @@
 #include <functional>
 
 namespace gametest {
+
+	///
+	// An action that runs a C++ std::function
+	///
 	class NativeFunctionGameTestAction : public BaseGameTestAction {
 	public:
 		NativeFunctionGameTestAction(int expectedDelay, GameTestActionCallback fn)

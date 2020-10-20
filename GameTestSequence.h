@@ -9,6 +9,9 @@ namespace gametest {
 	class BaseGameTestAction;
 	class GameTestInstance;
 
+	///
+	// A sequence, or action list, class that a GameTestInstance queues into
+	///
 	class GameTestSequence {
 	public:
 		GameTestSequence(GameTestInstance& testInstance);

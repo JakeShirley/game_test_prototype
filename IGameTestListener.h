@@ -3,6 +3,9 @@
 namespace gametest {
 	class GameTestInstance;
 
+	///
+	// A class that can listen for state changes in GameTests
+	///
 	class IGameTestListener {
 	public:
 		virtual ~IGameTestListener() = default;

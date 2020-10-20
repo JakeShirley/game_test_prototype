@@ -14,6 +14,9 @@ namespace gametest {
 	class IGameTestHelperProvider;
 	class IGameTestListener;
 
+	///
+	// A class that captures an actual running instance of a game test
+	///
 	class GameTestInstance {
 	public:
 		// DEBUG HACK

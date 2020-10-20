@@ -5,6 +5,10 @@
 #include <optional>
 
 namespace gametest {
+
+	///
+	// Base action that is ran in GameTestSequences
+	///
 	class BaseGameTestAction {
 	public:
 		BaseGameTestAction(int expectedDelay)

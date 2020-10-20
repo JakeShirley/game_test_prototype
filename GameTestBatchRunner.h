@@ -12,6 +12,9 @@ namespace gametest {
 	class IGameTestHelperProvider;
 	class MultipleTestTracker;
 
+	///
+	// A class that takes a set of GameTestBatches and generates instances and runs them in order
+	///
 	class GameTestBatchRunner {
 	public:
 		GameTestBatchRunner(IGameTestHelperProvider& helperProvider, std::vector<GameTestBatch> batches, GameTestTicker& testTicker, int testsPerRow);

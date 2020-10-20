@@ -7,6 +7,9 @@
 namespace gametest {
 	class GameTestInstance;
 
+	///
+	// A class that is the "model" for GameTestInstances and provides access to world data
+	///
 	class BaseGameTestHelper {
 	public:
 		BaseGameTestHelper(GameTestInstance& testInstance);

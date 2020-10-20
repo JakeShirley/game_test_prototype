@@ -6,11 +6,11 @@
 
 namespace gametest {
 
-	const std::string MultipleTestTracker::NOT_STARTED_TEST_CHAR = " ";
-	const std::string MultipleTestTracker::ONGOING_TEST_CHAR = "_";
-	const std::string MultipleTestTracker::SUCCESSFUL_TEST_CHAR = "+";
-	const std::string MultipleTestTracker::FAILED_OPTIONAL_TEST_CHAR = "x";
-	const std::string MultipleTestTracker::FAILED_REQUIRED_TEST_CHAR = "X";
+	const std::string MultipleTestTracker::sNotStartedTest = " ";
+	const std::string MultipleTestTracker::sOnGoingTest = "_";
+	const std::string MultipleTestTracker::sSuccessfulTest = "+";
+	const std::string MultipleTestTracker::sFailedOptionalTest = "x";
+	const std::string MultipleTestTracker::sFailedRequiredTest = "X";
 
 	MultipleTestTracker::MultipleTestTracker() = default;
 
@@ -108,16 +108,16 @@ namespace gametest {
 		ss << "[";
 		for (auto&& testInstance : mTests) {
 			if (!testInstance->hasStarted()) {
-				ss << NOT_STARTED_TEST_CHAR;
+				ss << sNotStartedTest;
 			}
 			else if (testInstance->hasSucceeded()) {
-				ss << SUCCESSFUL_TEST_CHAR;
+				ss << sSuccessfulTest;
 			}
 			else if (testInstance->hasFailed()) {
-				ss << (testInstance->isRequired() ? FAILED_REQUIRED_TEST_CHAR : FAILED_OPTIONAL_TEST_CHAR);
+				ss << (testInstance->isRequired() ? sFailedRequiredTest : sFailedOptionalTest);
 			}
 			else {
-				ss << ONGOING_TEST_CHAR;
+				ss << sOnGoingTest;
 			}
 		}
 

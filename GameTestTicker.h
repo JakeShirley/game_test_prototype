@@ -6,7 +6,9 @@
 namespace gametest {
 	class GameTestInstance;
 
-	// Queues and ticks tests
+	///
+	// Queues and ticks GameTestInstances.  This will likely be deep inside of Level or based on Level's tick
+	///
 	class GameTestTicker {
 	public:
 		void add(std::shared_ptr<GameTestInstance> test) {

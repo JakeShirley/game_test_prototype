@@ -8,7 +8,7 @@ namespace gametest {
 	};
 
 	///
-	//
+	// A class that captures an error that occured somewhere in GameTest
 	///
 	struct GameTestError {
 		GameTestErrorType type = GameTestErrorType::Unknown;

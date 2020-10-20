@@ -8,6 +8,9 @@
 namespace gametest {
 	class GameTestInstance;
 
+	///
+	// A simple IGameTestListener that logs to std::cout
+	///
 	class ConsoleGameTestListener : public IGameTestListener {
 	public:
 		virtual void onTestStructureLoaded(GameTestInstance& test) override {

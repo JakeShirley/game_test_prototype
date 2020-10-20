@@ -10,6 +10,9 @@ namespace gametest {
 	class GameTestTicker;
 	class IGameTestHelperProvider;
 
+	///
+	// A helper static class that can do common use case scenarios for game tests
+	///
 	class GameTestRunner {
 	public:
 		static void runTest(std::shared_ptr<GameTestInstance> test, GameTestTicker& ticker);

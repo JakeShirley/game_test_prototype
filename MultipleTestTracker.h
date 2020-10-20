@@ -7,6 +7,9 @@ namespace gametest {
 	class IGameTestListener;
 	class GameTestInstance;
 
+	///
+	// A class that wrangles multiple GameTestsInstances and runs them in order
+	///
 	class MultipleTestTracker {
 	public:
 		MultipleTestTracker();
